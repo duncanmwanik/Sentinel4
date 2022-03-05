@@ -1,0 +1,303 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console</title>
+    <link rel="shortcut icon" href="{{ url_for('home.static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('console.static', filename=('css/console.css')) }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" >
+
+</head>
+{% if true %}
+<body>
+    <div id="body">
+        <div id="header">
+            <div class="titles">
+                <div class="flex-left">
+                  <a class="home" href="{{ url_for('home.home_page') }}"><h2 class="h2">Sentinel<br></a><span class="mini-title">CONSOLE</span></h2>
+                    
+                </div>
+
+                <div id="control">
+                  <a><button type="button" class="button" data-toggle="modal" data-target="#addChannelModal"  data-id="{{ usd }}">
+                      Add Channel
+                    </button></a>
+
+                  <a href="#faceModal" id="open-face-modal" data-toggle="modal" data-target="#faceModal" 
+                      data-id="{{ usd }}" > 
+                    <i class="material-icons md-18 action-icon">account_box</i> 
+                    </a>
+   
+              </div>
+
+                <div class="flex-right">
+                  {% if session['username'] %}
+                  <a href=""><h4 class="h4 username">| | {{ session['username'] }}</h4></a>
+                  {% else %}
+                      <a href=""><h4 class="h4 username">| | Stranger</h4></a>
+                  {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div id="mainbody">
+            <div class="flexcon" id="flexcon">
+
+                {% for item in mainlist %}
+
+                <div class="sourcebar">
+                  <img id="{{ item['name'] }}" src="{{ url_for('console.video_feed', name=item['name'], url=item['url'], ar=item['ar'], fr=item['fr'], pd=item['pd'], usd=item['usd']) }}">
+                   
+                    <div>
+                        <div class="scontrols">
+                            <div class="flex-left">
+                              <h4 id="channel-name" class="h4">{{ item['name'] }}</h4>
+                            </div>
+                            
+                            <div class="flex-right">
+                               
+                                <a href="#expandedModal" id="expanded-modal" data-name="{{ item['name'] }}">
+                                <i class="material-icons md-18 action-icon">aspect_ratio</i>
+                                </a>
+                              
+                                <a href="#actionsModal" id="open-actions-modal" data-toggle="modal" data-target="#actionsModal" 
+                                data-id="{{ usd }}" data-name="{{ item['name'] }}" data-url="{{ item['url'] }}" data-ar="{{ item['ar'] }}"
+                                 data-fr="{{ item['fr'] }}" data-pd="{{ item['pd'] }}"> 
+                                <i class="material-icons md-18 action-icon">settings_applications</i> 
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+              
+            </div>
+        </div>
+
+   
+        <!-- Modal Add Channel----------------------START--->
+        <div class="modal fade" id="addChannelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Channel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form action="/add_channel" method="POST">
+                    <div class="modal-body">
+                      <input type="text" class="form-control invincible" id="channel-user-id" name="channel-user-id">
+                        <div class="form-group">
+                          <label for="channel-name" class="col-form-label">Channel Name</label>
+                          <input type="text" class="form-control" id="channel-name" name="channel-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="channel-url" class="col-form-label">Channel Url</label>
+                            <input type="text" class="form-control" id="channel-url" name="channel-url">
+                        </div>
+                        <br>
+                        <h6>Select stuff to perform:</h6>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="ar-checkbox" id="ar-checkbox" value="1">
+                            <label class="form-check-label" for="exampleCheck1">Action Recognition</label>
+                          </div>
+                          <div class="form-check">
+                              <input type="checkbox" class="form-check-input" name="fr-checkbox" id="fr-checkbox" value="1">
+                              <label class="form-check-label" for="exampleCheck2">Face Recognition</label>
+                            </div>
+                            <div class="form-check">
+                              <input type="checkbox" class="form-check-input" name="pd-checkbox" id="pd-checkbox" value="1">
+                              <label class="form-check-label" for="exampleCheck3">Person Detection</label>
+                            </div>
+                          </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" >Add</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        <!-- Modal Add Channel----------------------END--->
+
+        <!-- Modal Actions-----------------------START-->
+
+        <div class="modal fade" id="actionsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="actions-modal-title">Title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                    
+                    <form action="/update_channel" method="POST">
+                      
+                      <div class="form-group">
+                        <input type="text" class="form-control invincible" id="channel-old-name-edit" name="channel-old-name-edit">
+                        <input type="text" class="form-control invincible" id="user-id" name="user-id">
+                        <label for="channel-name-edit" class="col-form-label">Name</label>
+                        <input type="text" class="form-control" id="channel-name-edit" name="channel-name-edit">
+                        <label for="channel-url-edit" class="col-form-label">Url</label>
+                        <input type="text" class="form-control" id="channel-url-edit" name="channel-url-edit">
+                    </div>
+                    
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="ar-checkbox-edit" id="ar-checkbox-edit" value="1">
+                        <label class="form-check-label" for="ar-checkbox-edit">Action Recognition</label>
+                      </div>
+                      <div class="form-check">
+                          <input type="checkbox" class="form-check-input" name="fr-checkbox-edit" id="fr-checkbox-edit"  value="1">
+                          <label class="form-check-label" for="fr-checkbox-edit">Face Recognition</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" name="pd-checkbox-edit" id="pd-checkbox-edit"  value="1">
+                          <label class="form-check-label" for="pd-checkbox-edit">Person Detection</label>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <br>
+                          
+                      </form>
+                      <form action="/delete_channel" method="POST">
+                        <button type="submit" class="btn btn-primary btn-sm btn-block" id="delete-channel">Delete</button>
+                        <input type="text" class="form-control invincible" id="delete-name" name="delete-name">
+                        <input type="text" class="form-control invincible" id="delete-user-id" name="delete-user-id">
+                        </form>
+
+                      <div>
+                          <button type="button" class="btn btn-primary btn-sm btn-block">Run In Background</button>
+                      </div>
+                    
+                </div>
+                <!-- Footer goes here -->
+              </div>
+            </div>
+          </div>
+
+        <!-- Modal Actions----------------------END--->
+
+        <!-- Modal Face -------------------------START------>
+        <div class="modal fade" id="faceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered " role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="face-modal-title">Train Face Model</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+              <div class="modal-body">
+                <div class="card-header">
+                  <h6>Instructions:</h6>
+                  <h6>1. Create a folder named 'DATASET'.</h6>
+                  <h6>2. Inside DATASET, create a folder for each person and give it the person's name. No special characters and spaces.</h6>
+                  <h6>3. Inside each person's folder, add at least 10 images focusing on their face from different angles.</h6>
+                  <h6>4. CLick below and select the DATASET folder.</h6>
+              </div>
+                <form action="/train_face_console" method="POST" enctype="multipart/form-data">
+                  <input type="file" name="file" multiple>
+                  <input type="text" name="usd-console" id="usd-console" class="invincible">
+                  <div class="button-row">
+                      <button type="submit" class="submit-button">Save</button>
+                  </div>
+                </form>
+            
+              </div>
+          </div>
+          </div>
+      </div>
+      <!-- Modal Face ---------------------------END---->
+
+    </div>
+
+    <h6 id="usd-holder" class="invincible">{{ usd }}</h6>
+
+    <!-- <script type="text/javascript" src="{{ url_for('console.static', filename='js/console_jquery.js') }}"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <!-- Actions Modal ------------------>
+    <script type="text/javascript">
+
+        // Actions Modal ----------------------------------------START
+        $('#actionsModal').on('show.bs.modal', function(e) {
+            //get data-name attribute of the clicked element
+            var id = $(e.relatedTarget).data('id');
+            var name = $(e.relatedTarget).data('name');
+            var url = $(e.relatedTarget).data('url');
+            var ar = $(e.relatedTarget).data('ar');
+            var fr = $(e.relatedTarget).data('fr');
+            var pd = $(e.relatedTarget).data('pd');
+        
+            //fill the values
+            $(e.currentTarget).find('#actions-modal-title').text(name);
+            $(e.currentTarget).find('#user-id').val(id);
+            $(e.currentTarget).find('#delete-name').val(name);
+            $(e.currentTarget).find('#delete-user-id').val(id);
+            $(e.currentTarget).find('#channel-name-edit').val(name);
+            $(e.currentTarget).find('#channel-old-name-edit').val(name);
+            $(e.currentTarget).find('#channel-url-edit').val(url);
+            if(ar=='True'){
+              $(e.currentTarget).find('#ar-checkbox-edit').prop("checked", true);
+            } else{
+              $(e.currentTarget).find('#ar-checkbox-edit').prop("checked", false);
+            }
+            if(fr=='True'){
+              $(e.currentTarget).find('#fr-checkbox-edit').prop("checked", true);
+            } else{
+              $(e.currentTarget).find('#fr-checkbox-edit').prop("checked", false);
+            }
+            if(pd=='True'){
+              $(e.currentTarget).find('#pd-checkbox-edit').prop("checked", true);
+            } else{
+              $(e.currentTarget).find('#pd-checkbox-edit').prop("checked", false);
+            }
+
+        });
+        // Actions Modal ----------------------------------------END
+
+        // Add Channel Modal--------------------------------------START
+        $('#addChannelModal').on('show.bs.modal', function(e) {
+
+          var id = $(e.relatedTarget).data('id');
+          $(e.currentTarget).find('#channel-user-id').val(id);
+        });
+      // Add Channel Modal--------------------------------------END
+
+        // Face Model Modal-------------------------------------START
+        var usd = $('#usd-holder').text();
+        $('#usd-console').val(usd);
+        // Face Model Modal-------------------------------------END
+
+    </script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-analytics.js"></script>
+
+    <script>
+      
+    </script>
+
+</body>
+
+{% endif %}
+
+</html>

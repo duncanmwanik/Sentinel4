@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Started</title>
+	<link rel="shortcut icon" href="{{ url_for('home.static', filename='images/favicon.ico') }}">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('auth.static',filename='css/logup.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap" >
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+</head>
+{% if true %}
+<body>
+
+	<h1 class="invincible" id="page-name">{{ page }}</h1> 
+	<!-- Above is to store the page name to be redirected to -->
+
+	<div class="container" id="container">
+		<div class="form-container sign-up-container">
+			<form id="signup-form" action="/signup" method="POST">
+				<input type="text" class="form-control invincible" id="page-input-signup" name="page-input-signup">
+				<br>
+				<span>Please use an active email</span>
+				<div class="form-control">
+					<input type="text" placeholder="Macys" name="username" id="username" />
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input type="email" placeholder="macys@mail.com" name="email" id="email" />
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input type="phone" placeholder="0700123123" name="phone" id="phone" />
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input type="password" placeholder="Password" name="password" id="password"/>
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input type="password" placeholder="Confirm Password" name="password2" id="password2"/>
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<button type="submit" id="form-submit" class="invincible">S</button>
+				<button type="button" id="signup-button" class="submit">Sign Up</button>
+			</form>
+			
+		</div>
+		<div class="form-container sign-in-container">
+			<form id="login-form" action="/login" method="POST">
+				<input type="text" class="form-control invincible" id="page-input-login" name="page-input-login">
+				<br>
+				<br>
+				<span>Welcome back</span>
+				<br>
+				<div class="form-control">
+					<input id="email-login" type="email" id="email-login" name="email" placeholder="Email" />
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<div class="form-control">
+					<input id="password-login" type="password" id="password-login" name="password" placeholder="Password" />
+					<i class="fas fa-check-circle"></i>
+					<i class="fas fa-exclamation-circle"></i>
+					<small>Error message</small>
+				</div>
+				<!-- <a href="#">Forgot your password?</a> -->
+				<br>
+				<button id="login-button" class="submit" type="submit">LOG IN</button>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>No New Friends?</h1>
+					<br><br><br>
+					<button class="ghost" id="signIn">LOG IN</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>First time?</h1>
+					<br><br><br>
+					<button class="ghost" id="signUp">Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+	<script src="{{url_for('auth.static', filename='js/logup.js')}}"></script>
+
+	<script>
+		
+		var page = $('#page-name').text();
+
+		$('#page-input-login').val(page);
+		$('#page-input-signup').val(page);
+
+	</script>
+
+</body>
+
+{% endif %}
+</html>

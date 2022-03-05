@@ -1,0 +1,292 @@
+.h2 {
+  color: orangered;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-weight: 900;
+}
+
+.mini-title {
+  color:white;
+  font-size: 20px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.h4 {
+  color: orangered;
+  margin: 15px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.h5 {
+  color: orangered;
+  margin: 10px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+p {
+  color: orangered;
+  fill: orangered;
+  margin-right: 10px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+#mainbody
+{
+  width: 100%;
+  height:100%;
+  margin-top: 90px;
+  position:absolute;
+  top:0;
+  left:0;
+  background-color: #212121;
+}
+
+.flexcon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  background-color: #212121;
+}
+
+.sourcebar {  
+  border-radius: 15px;
+  width: 30%;
+  min-width: 300px;
+  align-self: center;
+  margin: 10px;
+  padding-bottom: 8px;
+  background-color: white;
+}
+
+.scontrols {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+}
+
+i {
+  color: orangered;
+}
+
+i:hover {
+  color: #00e70c;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.expanded-modal-feed {
+  width: 100%;
+}
+
+video {
+    display: block; 
+}
+
+.alert-text {
+  color: orangered;
+  margin: 10px;
+  margin-left: 60px;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.action-icon {
+  margin-top: 12px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; } /* Default */
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+#body
+{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+#header
+{
+  overflow-wrap: normal;
+  width:100%;
+  height:90px;  
+  position:absolute;
+  top:0;
+  left:0;
+  background-color: #161618;
+}
+
+#control
+{
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.titles
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-right
+{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.username
+{
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.flex-left
+{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button {  
+  display: inline-block;  
+  border-radius: 10px;  
+  background-color: orangered;  
+  border: none;  color: #FFFFFF;  
+  text-align: center;  
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  width: 120px;
+  padding: 5px;  
+  transition: all 0.3s;  
+  cursor: pointer;  
+  margin-left: 10px;
+  margin-right: 10px;
+  outline: none;
+}
+
+.button:hover {
+	background-color:#00e70c;
+  color: white;
+}
+
+.button::after {
+  outline: none;
+}
+
+.submit-button {  
+  display: inline-block;  
+  border-radius: 10px;  
+  background-color: orangered;  
+  border: none;  color: #FFFFFF;  
+  text-align: center;  
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  width: 120px;
+  padding: 5px;  
+  transition: all 0.3s;  
+  cursor: pointer;  
+  margin-right: 10px;
+  margin-top: 10px;
+  outline: none;
+}
+
+
+.submit-button:hover {
+	background-color:#00e70c;
+  color: white;
+}
+
+
+.submit-button::after {
+  outline: none;
+}
+
+
+.column {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40%;
+  height: 40%;
+  border-radius: 20px;
+}
+
+.card {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 #404040;
+  padding: 5px;
+  text-align: center;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.card-header {
+  padding: 15px;
+  margin-bottom: 20px;
+ }
+
+.card-title {
+margin-top: 10px; 
+font-weight: 700;
+}
+
+#od
+{
+  color: greenyellow;
+}
+
+#vc
+{
+  color: orangered;
+}
+
+.cardcontrols
+{
+  display: flex;
+  justify-content: center;
+}
+
+.videomain
+{
+  margin: 10px;
+}
+
+/* FACE APIs */
+canvas {
+  position: absolute;
+}
+
+.invincible {
+  display: none;
+}
+
+.home {
+  color: orangered;
+}
+
+.home:hover {
+  color: orangered;
+  text-decoration: none;
+}

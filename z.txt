@@ -1,0 +1,22 @@
+GIT---------------------
+git init
+git add --
+git commit -m ""
+git remote add origin <porject>
+git remote -v
+git push origin main 
+
+
+HEROKU------------------
+heroku create --
+heroku apps
+heroku apps:destroy --
+heroku git:remote -a --
+git push heroku master
+heroku logs --tail
+
+
+OTHER-------------------
+
+git init -b main
+git add .
